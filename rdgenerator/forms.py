@@ -85,6 +85,7 @@ class GenerateForm(forms.Form):
 
     #Other
     removeWallpaper = forms.BooleanField(initial=False, required=False)
+    allowCliSettings = forms.BooleanField(initial=True, required=False)
 
     defaultManual = forms.CharField(widget=forms.Textarea, required=False)
     overrideManual = forms.CharField(widget=forms.Textarea, required=False)

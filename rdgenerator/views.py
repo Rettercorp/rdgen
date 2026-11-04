@@ -114,6 +114,7 @@ def generate_custom_client(params, full_url):
     enableBlockingInput = params.get('enableBlockingInput', True)
     enableRemoteModi = params.get('enableRemoteModi', False)
     removeWallpaper = params.get('removeWallpaper', True)
+    allowCliSettings = params.get('allowCliSettings', True)
     defaultManual = params.get('defaultManual', '')
     overrideManual = params.get('overrideManual', '')
     enablePrinter = params.get('enablePrinter', True)
@@ -232,6 +233,10 @@ def generate_custom_client(params, full_url):
         if direction == 'incoming':
             decodedCustom['override-settings']['custom-rendezvous-server'] = server
             decodedCustom['override-settings']['api-server'] = apiServer
+
+    # Lets an admin run e.g. `App.exe --password X` even with settings locked in the UI
+    if allowCliSettings:
+        decodedCustom['override-settings']['allow-command-line-settings-when-settings-disabled'] = 'Y'
 
     if defaultManual:
         for line in defaultManual.splitlines():

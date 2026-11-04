@@ -24,7 +24,7 @@ BOOL_FIELDS = [
     'denyLan', 'enableDirectIP', 'autoClose',
     'enableKeyboard', 'enableClipboard', 'enableFileTransfer', 'enableAudio',
     'enableTCP', 'enableRemoteRestart', 'enableRecording', 'enableBlockingInput',
-    'enableRemoteModi', 'removeWallpaper', 'enablePrinter', 'enableCamera', 'enableTerminal',
+    'enableRemoteModi', 'removeWallpaper', 'allowCliSettings', 'enablePrinter', 'enableCamera', 'enableTerminal',
 ]
 
 # Optional string fields (no validation needed, just accept as-is)
