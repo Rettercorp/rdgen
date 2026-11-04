@@ -708,7 +708,7 @@ jobs:
 
       - name: Build msi
         continue-on-error: true
-        if: env.UPLOAD_ARTIFACT == 'true'
+        if: env.UPLOAD_ARTIFACT == 'true' && vars.BUILD_MSI == 'true'
         run: |
           pushd ./res/msi
           python preprocess.py --app-name "${{ env.appname }}" --arp -d ../../rustdesk
@@ -722,7 +722,7 @@ jobs:
         continue-on-error: true
         shell: pwsh
         run: |
-          Compress-Archive -Path ./SignOutput/*.exe, ./SignOutput/*.msi -DestinationPath ./SignOutput/unsigned_files.zip -CompressionLevel Fastest
+          Compress-Archive -Path ./SignOutput/* -DestinationPath ./SignOutput/unsigned_files.zip -CompressionLevel Fastest
 
       - name: sign exe and msi
         continue-on-error: true

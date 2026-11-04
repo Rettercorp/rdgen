@@ -85,7 +85,8 @@ def generate_custom_client(params, full_url):
     appname_display = params.get('appname', '')
     if not appname_display:
         appname_display = "rustdesk"
-    appname = re.sub(r"[:|\\/]", "", appname_display).replace(" ", "")
+    # RustDesk 1.5+ refuses to install when the app name has anything but letters, digits or "-"
+    appname = re.sub(r"[^A-Za-z0-9-]", "", appname_display) or "rustdesk"
     filename = params.get('exename', 'rustdesk')
     compname = params.get('compname', '')
     if not compname:
@@ -168,7 +169,7 @@ def generate_custom_client(params, full_url):
     if settings == "settingsN":
         decodedCustom['disable-settings'] = 'Y'
     if appname.upper != "rustdesk".upper and appname != "":
-        decodedCustom['app-name'] = appname_display
+        decodedCustom['app-name'] = appname
     decodedCustom['override-settings'] = {}
     decodedCustom['default-settings'] = {}
     if permPass != "":
@@ -492,7 +493,7 @@ def check_for_file(request):
             file_path = os.path.join('exe', uuid, f)
             if os.path.isfile(file_path):
                 existing_files.append(f)
-            else:
+            elif not f.endswith('.msi'):  # MSI is optional (repo variable BUILD_MSI)
                 missing_files.append(f)
 
         return render(request, 'generated.html', {

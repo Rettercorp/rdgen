@@ -84,7 +84,7 @@ class GenerateForm(forms.Form):
     enableTerminal = forms.BooleanField(initial=True, required=False)
 
     #Other
-    removeWallpaper = forms.BooleanField(initial=True, required=False)
+    removeWallpaper = forms.BooleanField(initial=False, required=False)
 
     defaultManual = forms.CharField(widget=forms.Textarea, required=False)
     overrideManual = forms.CharField(widget=forms.Textarea, required=False)
